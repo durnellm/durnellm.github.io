@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <link rel="stylesheet" href="main.css" />
+    </head>
+
+    <body>
+        <h1>
+            AWCC
+        </h1>
+
+        <p>
+            Type in your username (exactly as it appears on MAL) to recieve your fortune
+        </p>
+
+        <input type="text" id="input"/><br>
+        <button onclick="draw()">Submit</button>
+
+        <p id="p1">
+            
+        </p>
+
+        <p id="p2">
+
+        </p>
+        <script>
+            
+            function draw() {
+                let un = document.getElementById("input").value.toLowerCase();
+                document.getElementById("p1").innerText = un;
+                let genres = [{genre:'Action',adjective:'active',card:'Strength'}, {genre:'Adventure',adjective:'daring',card:'The World'}, {genre:'Comedy',adjective:'humorous',card:'The Fool'}, {genre:'Drama',adjective:'theatric',card:'The Star'}, {genre:'Fantasy',adjective:'whimsical',card:'The Magician'}, {genre:'Horror',adjective:'gruesome',card:'Death'}, {genre:'Mystery',adjective:'secretive',card:'The Moon'}, {genre:'Romance',adjective:'charming',card:'The Lovers'}, {genre:'Sci-Fi',adjective:'futuristic',card:'The Tower'}, {genre:'Slice of Life',adjective:'laid back',card:'the Hermit'}, {genre:'Sports',adjective:'competitive',card:'The Chariot'}, {genre:'Supernatural',adjective:'unearthly',card:'Wheel of Fortune'}];
+                let themes = [{theme:'Adult Cast',weight:'0.109528653780943',noun:'an adult',card:'King of Wands'},
+                    {theme:'Anthropomorphic',weight:'0.156324177687352',noun:'a mascot',card:'Queen of Wands'},
+                    {theme:'CGDCT',weight:'0.0569684638860631',noun:'a schoolgirl',card:'Knight of Wands'},
+                    {theme:'Combat Sports',weight:'0.029501525940997',noun:'a boxer',card:'Ace of Wands'},
+                    {theme:'Detective',weight:'0.0885045778229908',noun:'a detective',card:'Ten of Wands'},
+                    {theme:'Educational',weight:'0.0742624618514751',noun:'a teacher',card:'Nine of Wands'},
+                    {theme:'Gag Humor',weight:'0.070871481858257',noun:'a clown',card:'Eight of Wands'},
+                    {theme:'Gore',weight:'0.0451000339097999',noun:'a butcher',card:'Seven of Wands'},
+                    {theme:'Harem',weight:'0.130552729738895',noun:'a male flirt',card:'Six of Wands'},
+                    {theme:'Historical',weight:'0.46795523906409',noun:'a historian',card:'King of Swords'},
+                    {theme:'Idols (Female)',weight:'0.084774499830451',noun:'a female idol',card:'King of Cups'},
+                    {theme:'Idols (Male)',weight:'0.0403526619192947',noun:'a male idol',card:'Queen of Cups'},
+                    {theme:'Isekai',weight:'0.0854526958290946',noun:'a traveler',card:'Knight of Cups'},
+                    {theme:'Iyashikei',weight:'0.0617158358765683',noun:'someone softspoken',card:'Page of Cups'},
+                    {theme:'Love Polygon',weight:'0.0237368599525263',noun:'someone in love',card:'Ace of Cups'},
+                    {theme:'Mahou Shoujo',weight:'0.0796880298406239',noun:'a magical girl',card:'Ten of Cups'},
+                    {theme:'Martial Arts',weight:'0.179382841641234',noun:'a black belt',card:'Nine of Cups'},
+                    {theme:'Mecha',weight:'0.405561207188878',noun:'a robot',card:'Eight of Cups'},
+                    {theme:'Military',weight:'0.22177009155646',noun:'a general',card:'Seven of Cups'},
+                    {theme:'Music',weight:'1',noun:'a pianist',card:'Six of Cups'},
+                    {theme:'Mythology',weight:'0.192607663614785',noun:'a youkai',card:'Page of Wands'},
+                    {theme:'Otaku Culture',weight:'0.0223804679552391',noun:'a cosplayer',card:'Queen of Swords'},
+                    {theme:'Parody',weight:'0.235673109528654',noun:'a comedian',card:'Knight of Swords'},
+                    {theme:'Performing Arts',weight:'0.0278060359443879',noun:'a dancer',card:'Page of Swords'},
+                    {theme:'Pets',weight:'0.0284842319430315',noun:'a dog',card:'Ace of Swords'},
+                    {theme:'Psychological',weight:'0.135639199728722',noun:'a psychiatrist',card:'Ten of Swords'},
+                    {theme:'Racing',weight:'0.0590030518819939',noun:'a cyclist',card:'Nine of Swords'},
+                    {theme:'Reincarnation',weight:'0.0281451339437097',noun:'a goddess',card:'Eight of Swords'},
+                    {theme:'Reverse Harem',weight:'0.0210240759579519',noun:'a female flirt',card:'Seven of Swords'},
+                    {theme:'Samurai',weight:'0.0725669718548661',noun:'a samurai',card:'Six of Swords'},
+                    {theme:'School',weight:'0.613428280773144',noun:'a principal',card:'Page of Pentacles'},
+                    {theme:'Space',weight:'0.178365547643269',noun:'an alien',card:'King of Pentacles'},
+                    {theme:'Strategy Game',weight:'0.105798575788403',noun:'a grandmaster',card:'Queen of Pentacles'},
+                    {theme:'Super Power',weight:'0.210918955578162',noun:'a superhero',card:'Knight of Pentacles'},
+                    {theme:'Team Sports',weight:'0.098677517802645',noun:'a pitcher',card:'Ace of Pentacles'},
+                    {theme:'Time Travel',weight:'0.0396744659206511',noun:'a time traveler',card:'Ten of Pentacles'},
+                    {theme:'Vampire',weight:'0.050186503899627',noun:'a vampire',card:'Nine of Pentacles'},
+                    {theme:'Video Game',weight:'0.0430654459138691',noun:'a programmer',card:'Eight of Pentacles'},
+                    {theme:'Visual Arts',weight:'0.0267887419464225',noun:'an artist',card:'Seven of Pentacles'},
+                    {theme:'Workplace',weight:'0.0444218379111563',noun:'a salaryman',card:'Six of Pentacles'}];
+                let themetags = [{themetag:'Aliens',weight:'0.827760891590679',noun:'aliens',card:'Five of Wands'},
+                    {themetag:'Androids',weight:'0.557244174265451',noun:'androids',card:'Four of Wands'},
+                    {themetag:'Conspiracy',weight:'0.526849037487335',noun:'conspirators',card:'Three of Wands'},
+                    {themetag:'Deities',weight:'0.414387031408308',noun:'deities',card:'Two of Wands'},
+                    {themetag:'Detectives',weight:'0.67274569402229',noun:'detectives',card:'Five of Cups'},
+                    {themetag:'Disasters',weight:'0.546099290780142',noun:'disasters',card:'Four of Cups'},
+                    {themetag:'Dragons',weight:'0.421479229989868',noun:'dragons',card:'Three of Cups'},
+                    {themetag:'Friendship',weight:'1',noun:'friends',card:'Two of Cups'},
+                    {themetag:'Ghosts',weight:'0.430597771023303',noun:'ghosts',card:'Five of Swords'},
+                    {themetag:'Gore',weight:'0.652482269503546',noun:'murderers',card:'Four of Swords'},
+                    {themetag:'Gunfights',weight:'0.857142857142857',noun:'gunfights',card:'Three of Swords'},
+                    {themetag:'Historical Period',weight:'0.453900709219858',noun:'historians',card:'Two of Swords'},
+                    {themetag:'Love Triangles',weight:'0.765957446808511',noun:'love triangles',card:'Five of Pentacles'},
+                    {themetag:'Maids',weight:'0.516717325227964',noun:'maids',card:'Four of Pentacles'},
+                    {themetag:'Parental Abandomnent',weight:'0.598784194528875',noun:'orphans',card:'Three of Pentacles'},
+                    {themetag:'Robots',weight:'0.787234042553192',noun:'robots',card:'Two of Pentacles'}];
+                g = [0,1,2,3,4,5,6,7,8,9,10,11];
+                t = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39];
+                tt = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15];
+                let seed = MurmurHash3(un);
+                let random = Mulberry32(seed());
+                let i1 = Math.floor(random()*g.length);
+                let g1 = genres[g[i1]];
+                g.splice(i1,1);
+                let i2 = Math.floor(random()*g.length);
+                g2 = genres[g[i2]];
+                g.splice(i2,1);
+                g3 = genres[g[Math.floor(random()*g.length)]];
+                i3 = Math.floor(random()*t.length);
+                t1 = themes[t[i3]];
+                t.splice(i3,1);
+                i4 = Math.floor(random()*t.length);
+                t2 = themes[t[i4]];
+                i5 = Math.floor(random()*tt.length);
+                tt1 = themetags[tt[i5]];
+                while(t1.weight+t2.weight+tt1.weight<.7){
+                    i5 = Math.floor(random()*tt.length);
+                }
+                tt1 = themetags[tt[i5]];
+                tt.splice(i5,1);
+                i6 = Math.floor(random()*tt.length);
+                tt2 = themetags[tt[i6]]
+                document.getElementById("p1").innerHTML = "Your first card is <b>"+g1.card+"</b>, you should try to be more <b>"+g1.adjective+"</b> today<br>"
+                    + "Your second card is <b>"+g2.card+"</b>, you should try to avoid anyone that is <b>"+g2.adjective+"</b><br>"
+                    + "Last we have the <b>"+t1.card+"</b>, the <b>"+t2.card+"</b>, and the <b>"+tt1.card+"</b><br>"
+                    + "Try to interact with <b>"+t1.noun+"</b>, <b>"+t2.noun+"</b>, or <b>"+tt1.noun+"</b><br><br>"
+                    + "Add the following to your challenge post:<br>"
+
+                document.getElementById("p2").innerHTML = "Watch an anime that is at least 30 minutes and has the [b]"+g1.genre+"[/b] Genre, does not have the [b]"+g2.genre+"[/b], and has either the [b]"+t1.theme+"[/b] Theme, [b]"+t2.theme+"[/b] Theme, or [b]"+tt1.themetag+"[/b] Theme Tag: "
+            }
+
+            function MurmurHash3(string) {
+                let i = 0;
+                for (i, hash = 1779033703 ^ string.length; i < string.length; i++) {
+                    let bitwise_xor_from_character = hash ^ string.charCodeAt(i);
+                    hash = Math.imul(bitwise_xor_from_character, 3432918353);
+                    hash = hash << 13 | hash >>> 19;
+                } return () => {
+                // Return the hash that you can use as a seed
+                    hash = Math.imul(hash ^ (hash >>> 16), 2246822507);
+                    hash = Math.imul(hash ^ (hash >>> 13), 3266489909);
+                    return (hash ^= hash >>> 16) >>> 0;
+                }
+            }
+
+            function Mulberry32(string) {
+                return () => {
+                    let for_bit32_mul = string += 0x6D2B79F5;
+                    let cast32_one = for_bit32_mul ^ for_bit32_mul >>> 15;
+                    let cast32_two = for_bit32_mul | 1;
+                    for_bit32_mul = Math.imul(cast32_one, cast32_two);
+                    for_bit32_mul ^= for_bit32_mul + Math.imul(for_bit32_mul ^ for_bit32_mul >>> 7, for_bit32_mul | 61);
+                    return ((for_bit32_mul ^ for_bit32_mul >>> 14) >>> 0) / 4294967296;
+                }
+            }
+
+
+        </script>
+
+    </body>
+</html>
