@@ -32,7 +32,8 @@
             function draw(check) {
                 const queryString = window.location.search;
                 const urlParams = new URLSearchParams(queryString);
-                let un = urlParams.get("input").toLowerCase();
+                let un1 = urlParams.get("input");
+                let un = un1.toLowerCase();
                 if (un!=""){
                     while (un.includes("&#")){
                         un=un.slice(0,un.search("&#"))+String.fromCodePoint(un.slice(un.search("&#")+2,un.search(";",un.search("&#"))))+un.slice(un.search(";",un.search("&#"))+1)
@@ -120,7 +121,7 @@
                     tt.splice(i5,1);
                     i6 = Math.floor(random()*tt.length);
                     tt2 = themetags[tt[i6]]
-                    document.getElementById("p1").innerHTML = "Your first card is <b>"+g1.card+"</b>, you should try to be more <b>"+g1.adjective+"</b> today<br>"
+                    document.getElementById("p1").innerHTML = "You submitted <b>" + un1 + "</b><br>Your first card is <b>"+g1.card+"</b>, you should try to be more <b>"+g1.adjective+"</b> today<br>"
                         + "Your second card is <b>"+g2.card+"</b>, you should try to avoid anyone that is <b>"+g2.adjective+"</b><br>"
                         + "Last we have the <b>"+t1.card+"</b>, the <b>"+t2.card+"</b>, and the <b>"+tt1.card+"</b><br>"
                         + "Try to interact with <b>"+t1.noun+"</b>, <b>"+t2.noun+"</b>, or <b>"+tt1.noun+"</b>"
