@@ -32,3 +32,22 @@ form {
 b {
   font-weight: bolder;
 }
+table{
+    color: white;
+    text-align: center;
+    margin-left: auto;
+  margin-right: auto;
+}
+th, td {
+    width:10%;
+    overflow: hidden;
+}
+th:nth-child(2){
+    width:60%;
+}
+tbody tr:nth-child(even){
+    background-color: darkorchid
+}
+tbody tr:nth-child(odd){
+    background-color: blueviolet
+}
