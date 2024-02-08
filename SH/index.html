@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <!-- saved from url=(0027)https://durnellm.github.io/ -->
 <html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link rel="stylesheet" href="../main.css">
+        <link rel="stylesheet" href="./durnellm.github.io_files/main.css">
         <script src="SH.js"></script>
         <script src="Day.js"></script>
         <script src="Num.js"></script>
@@ -37,10 +37,10 @@
                 const queryString = window.location.search;
                 const urlParams = new URLSearchParams(queryString);
                 let un = urlParams.get("input");
-                if (un!=undefined){
-                    if (SH[un] == undefined && Num[un] == undefined && Day[un] == undefined) {
+                if (SH[un] == undefined && Num[un] == undefined && Day[un] == undefined) {
 	        	    document.getElementById('p1').innerText="Invalid User"
-	                }
+	            }
+                if (un!=""){
                     hunts = SH[un]
 	                nums = Num[un]
 	                days = Day[un]
@@ -117,7 +117,6 @@
                             t.ID === value.ID && t.Number === value.Number && t.Index === value.Index && t.Run === value.Run
                         ))
                     )
-                    document.getElementById("test").innerText=un
                     document.getElementById("p1").innerText="Non-Unique Hunts"
                     updateTable('t1',hdupes)
                     document.getElementById("p5").innerText="Reused SH Anime"
