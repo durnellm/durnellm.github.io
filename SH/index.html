@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<!-- saved from url=(0027)https://durnellm.github.io/ -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" href="./durnellm.github.io_files/main.css">
+        <script src="SH.js"></script>
+        <script src="Day.js"></script>
+        <script src="Num.js"></script>
+
+    <body onload="draw(false)">
+        <h1>
+            Scavenger Hunt Checker
+        </h1>
+
+        <p id="test">
+            Username
+        </p>
+        <form>
+            <input type="text" id="input" name="input"><br>
+            <input type="submit" value="Submit" onclick="draw(false)">
+        </form>
+        
+
+        <p id="p1"></p>
+        <table id="t1"></table>
+        <p id="p5"></p>
+        <table id="t2"></table>
+        <p id="p3"></p>
+        <table id="t3"></table>
+        <p id="p4"></p>
+        <table id="t4"></table>
+
+        <button onclick="draw(true)" style="display:none" id="button2">Redraw</button>
+        <script>
+            
+            function draw(check) {
+
+                const queryString = window.location.search;
+                const urlParams = new URLSearchParams(queryString);
+                let un = urlParams.get("input");
+                if (SH[un] == undefined && Num[un] == undefined && Day[un] == undefined) {
+	        	    document.getElementById('p1').innerText="Invalid User"
+	            }
+                if (un!=""){
+                    hunts = SH[un]
+	                nums = Num[un]
+	                days = Day[un]
+                    hdupes = []
+                    slist = []
+                    sdupes = []
+                    nlist = []
+                    ndupes = []
+                    dlist = []
+                    ddupes = []
+                    for (let i in hunts) {
+                        if (!hunts[i]['Unique']) {
+                            hdupes.push(hunts[i])
+                        }
+                        for (let j in hunts[i]['Anime']) {
+                            temp = hunts[i]['Anime'][j]
+                            temp['Number']=hunts[i]['Number']
+                            temp['Index']=hunts[i]['Index']
+                            temp['Run']=hunts[i]['Run']
+                            slist.push(temp)
+                        }
+                    }
+                    for (i = 1; i < slist.length; i++) {
+                        for (j = 0; j< i; j++){
+                            if (slist[j].ID == slist[i].ID) {
+                                sdupes.push(slist[i], slist[j])
+                            }
+                        }
+                    }
+                    sdupes = sdupes.filter((value, Index, self) =>
+                        Index === self.findIndex((t) => (
+                            t.ID === value.ID && t.Number === value.Number && t.Index === value.Index && t.Run === value.Run
+                        ))
+                    )
+                    for (let i in nums) {
+                        for (let j in nums[i]['Anime']) {
+                            temp = nums[i]['Anime'][j]
+                            temp['Number']=nums[i]['Number']
+                            temp['Index']=nums[i]['Index']
+                            temp['Run']=nums[i]['Run']
+                            nlist.push(temp)
+                        }
+                    }
+                    for (i = 1; i < nlist.length; i++) {
+                        for (j = 0; j< i; j++){
+                            if (nlist[j].ID == nlist[i].ID) {
+                                ndupes.push(nlist[i], nlist[j])
+                            }
+                        }
+                    }
+                    ndupes = ndupes.filter((value, Index, self) =>
+                        Index === self.findIndex((t) => (
+                            t.ID === value.ID && t.Number === value.Number && t.Index === value.Index && t.Run === value.Run
+                        ))
+                    )
+                    for (let i in days) {
+                        for (let j in days[i]['Anime']) {
+                            temp = days[i]['Anime'][j]
+                            temp['Number']=days[i]['Number']
+                            temp['Index']=days[i]['Index']
+                            temp['Run']=days[i]['Run']
+                            dlist.push(temp)
+                        }
+                    }
+                    for (i = 1; i < dlist.length; i++) {
+                        for (j = 0; j< i; j++){
+                            if (dlist[j].ID == dlist[i].ID) {
+                                ddupes.push(dlist[i], dlist[j])
+                            }
+                        }
+                    }
+                    ddupes = ddupes.filter((value, Index, self) =>
+                        Index === self.findIndex((t) => (
+                            t.ID === value.ID && t.Number === value.Number && t.Index === value.Index && t.Run === value.Run
+                        ))
+                    )
+                    document.getElementById("p1").innerText="Non-Unique Hunts"
+                    updateTable('t1',hdupes)
+                    document.getElementById("p5").innerText="Reused SH Anime"
+                    updateTable('t2',sdupes)
+                    document.getElementById("p3").innerText="Reused Numbers Anime"
+                    updateTable('t3',ndupes)
+                    document.getElementById("p4").innerText="Reused Day of the Week Anime"
+                    updateTable('t4',ddupes)
+
+                }
+            }
+            function updateTable(tableId, jsonData){
+                var tableHTML = "<tr>";
+                for (var headers in jsonData[0]) {
+                tableHTML += "<th>" + headers + "</th>";
+                }
+                tableHTML += "</tr>";
+
+                for (var eachItem in jsonData) {
+                tableHTML += "<tr>";
+                var dataObj = jsonData[eachItem];
+                for (var eachValue in dataObj){
+                    tableHTML += "<td>" + dataObj[eachValue] + "</td>";
+                }
+                tableHTML += "</tr>";
+                }
+
+                document.getElementById(tableId).innerHTML = tableHTML;
+                }
+
+        </script>
+
+    
+</body></html>
